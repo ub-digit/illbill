@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>LF-nummer</td>
+      <td>Titel</td>
+      <td>Bib</td>
+      <td>Code</td>
+      <td>Price</td>
+      <td>Leveranssätt</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |o| %>
+      <tr>
+        <td><%= o.id %></td>
+        <td><%= o.lf_number %></td>
+        <td><%= o.title %></td>
+        <td><%= o.receiving_library_code %></td>
+        <td><%= o.receiving_library_name %></td>
+        <td><%= o.price %></td>
+        <td><%= o.processing_time %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

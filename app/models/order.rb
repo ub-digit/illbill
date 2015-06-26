@@ -18,4 +18,26 @@ class Order < ActiveRecord::Base
     rescue
       return ""
   end
+
+  def title
+    json_hash['ill_requests'][0]['title']
+    rescue
+      return ""
+  end
+
+  def processing_time
+    json_hash['ill_requests'][0]['processing_time']
+    rescue
+      return ""
+  end
+
+  def as_json (opts = {})
+
+    return super.merge({
+      receiving_library_code: receiving_library_code,
+      receiving_library_name: receiving_library_name
+      })
+
+  end
+
 end
