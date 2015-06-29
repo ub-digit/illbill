@@ -119,4 +119,15 @@ RSpec.describe Order, type: :model do
     end
   end
 
+  describe 'lf_number' do
+    it 'it should be unique' do
+      order1 = create(:order, lf_number: 'Skfb-150402-0003')
+      order2 = build(:order, lf_number: 'Skfb-150402-0003')
+
+      expect(order2.valid?).to be_falsey      
+      expect(order2.errors.messages[:lf_number]).to_not be_empty
+      expect(order2.errors.messages[:lf_number]).to include('LF-nummer redan registrerat')
+    end
+  end
+
 end

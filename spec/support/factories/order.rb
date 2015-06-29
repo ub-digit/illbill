@@ -1,10 +1,19 @@
 FactoryGirl.define do
+
+  sequence :lf_number do |n|
+    "Skfb-150402-000#{n}"
+  end
+
+
   factory :order do
+
+    lf_number
+
     #step {generate :step}
     #association :job, factory: [:job]
     #process "CONFIRMATION"
     #description "Test confirmation flow step"
-    #params "{\"manual\":true}"    
+    #params "{\"manual\":true}"
 
     trait :has_json do
       json JSON.parse(File.new("#{Rails.root}/spec/support/mocks/order_json_hash.json").read).to_json

@@ -1,4 +1,5 @@
 class Order < ActiveRecord::Base
+  validates :lf_number, uniqueness: {message: "LF-nummer redan registrerat"}
 
   def json_hash
 

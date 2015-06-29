@@ -1,4 +1,5 @@
 require 'httparty'
+
 class V1::OrdersController < ApplicationController
 
   def fetch_order
@@ -20,10 +21,11 @@ class V1::OrdersController < ApplicationController
     params[:order][:json] = params[:order][:json].to_json
     order = Order.new(order_params)
 
-    if order.save!
+    if order.save
       render json: {order: order}, status: 201
     else
-      render json: {error: {msg: 'fel', errors: order.errors}}, status: 422
+
+      render json: {error: {msg: 'Ordern kunde inte sparas', errors: order.errors}}, status: 422
     end
 
   end
@@ -65,25 +67,11 @@ class V1::OrdersController < ApplicationController
 
     order = Order.find_by_id(params[:id])
 
-    if order.update_attributes(order_params)
+    if order.update_attributes(order_update_params)
       render json: {order: order}, status: 200
     else
       render json: {error: {msg: 'fel', errors: order.errors}}, status: 422
     end
-
-  end
-
-
-  def update_many
-
-    #orders = Order.where(id: params[:ids])
-
-    # gör json-magi
-
-    #params[:orders]
-
-    #orders.update
-
 
   end
 
@@ -104,6 +92,7 @@ class V1::OrdersController < ApplicationController
 
     respond_to do |format|
       format.html {render 'v1/orders/invoice_data'}
+      format.pdf { send_data InvoiceData.create_pdf(@orders), :filename => "pdf.pdf", type: "application/pdf", disposition: "inline" }
     end
 
 
@@ -113,6 +102,10 @@ class V1::OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(:lf_number, :json, :price, :invoiced)
+  end
+
+  def order_update_params
+    params.require(:order).permit(:lf_number, :price, :invoiced)
   end
 
 end
