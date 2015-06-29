@@ -4,6 +4,8 @@ lock '3.4.0'
 set :application, 'illbill-server'
 set :repo_url, 'git@github.com:ub-digit/illbill.git'
 
+# set :rvm_ruby_version, '2.2.1'
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
