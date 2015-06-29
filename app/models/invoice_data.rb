@@ -11,7 +11,7 @@ class InvoiceData
 
     pdf.text orders[0].receiving_library_name + ' (' + orders[0].receiving_library_code + ')', :size=>12, :style=>:bold
 
-
+    pdf.move_down 10.send(:mm)
     pdf.font_size = 10
 
     data = orders.map do |order|
@@ -30,9 +30,10 @@ class InvoiceData
 
     pdf.table data do
 
-      cells.borders = [:bottom]
-
+      row(0).font_style = :bold
       header = true
+
+      cells.borders = [:bottom]
 
       cells.column(0).width = 40.send(:mm)
       cells.column(2).width = 20.send(:mm)
