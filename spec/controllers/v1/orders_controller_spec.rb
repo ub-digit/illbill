@@ -79,7 +79,29 @@ RSpec.describe V1::OrdersController, type: :controller do
 
 
   describe 'index' do
-    context  '17 orders exist' do
+    context 'with filter param done' do
+      it 'should return a list of done orders' do
+        create_list(:done_order, 5)
+        create_list(:todo_order, 3)
+
+        get :index, status: 'done'
+
+        expect(json['orders'].count).to be 5
+      end
+    end
+
+    context 'with filter param done' do
+      it 'should return a list of done orders' do
+        create_list(:done_order, 3)
+        create_list(:todo_order, 5)
+
+        get :index, status: 'todo'
+
+        expect(json['orders'].count).to be 5
+      end
+    end
+
+    context  'without filter params' do
       it 'should return 17 orders' do
         create_list(:order, 17)
 

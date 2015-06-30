@@ -10,6 +10,13 @@ class InvoiceData
     pdf.move_down 20.send(:mm)
 
     pdf.text orders[0].receiving_library_name + ' (' + orders[0].receiving_library_code + ')', :size=>12, :style=>:bold
+    pdf.text orders[0].receiving_library_department, :size=>12, :style=>:normal
+    pdf.text orders[0].receiving_library_address1, :size=>12, :style=>:normal
+    pdf.text orders[0].receiving_library_address2, :size=>12, :style=>:normal
+    pdf.text orders[0].receiving_library_address3, :size=>12, :style=>:normal
+    pdf.text orders[0].receiving_library_zip_code + ' ' + orders[0].receiving_library_city, :size=>12, :style=>:normal
+
+
 
     pdf.move_down 10.send(:mm)
     pdf.font_size = 10

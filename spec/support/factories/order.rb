@@ -19,7 +19,19 @@ FactoryGirl.define do
       json JSON.parse(File.new("#{Rails.root}/spec/support/mocks/order_json_hash.json").read).to_json
     end
 
+    trait :invoiced do
+      invoiced true
+    end
+
+    trait :not_invoiced do
+      invoiced false
+    end
+
     factory :order_with_json, traits: [:has_json]
+
+    factory :done_order, traits: [:invoiced]
+
+    factory :todo_order, traits: [:not_invoiced]
 
   end
 

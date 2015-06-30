@@ -20,6 +20,42 @@ class Order < ActiveRecord::Base
       return ""
   end
 
+  def receiving_library_department
+    json_hash['ill_requests'][0]['receiving_library']['department']
+    rescue
+      return ""
+  end
+
+  def receiving_library_address1
+    json_hash['ill_requests'][0]['receiving_library']['address1']
+    rescue
+      return ""
+  end
+
+  def receiving_library_address2
+    json_hash['ill_requests'][0]['receiving_library']['address2']
+    rescue
+      return ""
+  end
+
+  def receiving_library_address3
+    json_hash['ill_requests'][0]['receiving_library']['address3']
+    rescue
+      return ""
+  end
+
+  def receiving_library_city
+    json_hash['ill_requests'][0]['receiving_library']['city']
+    rescue
+      return ""
+  end
+
+  def receiving_library_zip_code
+    json_hash['ill_requests'][0]['receiving_library']['zip_code']
+    rescue
+      return ""
+  end
+
   def title
     json_hash['ill_requests'][0]['title']
     rescue
