@@ -4,7 +4,10 @@ class V1::OrdersController < ApplicationController
 
   def fetch_order
     id=params[:id]
-    response = HTTParty.get('http://iller.libris.kb.se/illse/api/illrequests/G/' + id)
+
+    headers = {'api-key' => '8781974720909019987'}
+
+    response = HTTParty.get('http://iller.libris.kb.se/illse/api/illrequests/G/' + id, :headers => headers)
 
     if response['ill_requests'].blank?
       render json: {order: response}, status: 404
