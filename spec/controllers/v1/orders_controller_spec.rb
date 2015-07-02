@@ -10,12 +10,12 @@ RSpec.describe V1::OrdersController, type: :controller do
 
       #valid ID
       stub_request(:get, "http://iller.libris.kb.se/illse/api/illrequests/G/Skfb-150402-0003").
-         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+         with(:headers => {'api-key' => 'a4a0437444f147d5d53007b8881edd53'}).
          to_return(:status => 200, :body => File.new("#{Rails.root}/spec/support/mocks/valid_order.json"), :headers => {"Content-Type" => "application/json"})
 
       #invalid ID
       stub_request(:get, "http://iller.libris.kb.se/illse/api/illrequests/G/Xxxx-150402-0003").
-         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+         with(:headers => {'api-key' => 'a4a0437444f147d5d53007b8881edd53'}).
          to_return(:status => 400, :body => File.new("#{Rails.root}/spec/support/mocks/invalid_order.json"), :headers => {"Content-Type" => "application/json"})
 
     end

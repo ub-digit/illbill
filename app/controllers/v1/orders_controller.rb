@@ -5,7 +5,7 @@ class V1::OrdersController < ApplicationController
   def fetch_order
     id=params[:id]
 
-    headers = {'api-key' => '8781974720909019987'}
+    headers = {'api-key' => 'a4a0437444f147d5d53007b8881edd53'}
 
     response = HTTParty.get('http://iller.libris.kb.se/illse/api/illrequests/G/' + id, :headers => headers)
 
