@@ -56,12 +56,12 @@ RSpec.describe V1::OrdersController, type: :controller do
   describe 'create' do
     context 'a valid order object' do
       it 'should return an object' do
-        post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "asfadsfasdf"}.as_json, price: 160, invoiced: false}
+        post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "asfadsfasdf"}.as_json, price: 160, invoiced: false, sigel: "Gk"}
 
         expect(json['order']).to_not be nil
       end
       it 'should return a status 201' do
-        post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "asfadsfasdf"}.as_json, price: 160, invoiced: false}
+        post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "asfadsfasdf"}.as_json, price: 160, invoiced: false, sigel: "Gk"}
 
         expect(response.status).to eq(201)
       end
@@ -69,8 +69,8 @@ RSpec.describe V1::OrdersController, type: :controller do
 
     context 'with an allready existing lf-number' do
       it 'should return a 422 status' do
-        post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "asfadsfasdf"}.as_json, price: 160, invoiced: false}
-        post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "ewrqwerqw"}.as_json, price: 180, invoiced: false}
+        post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "asfadsfasdf"}.as_json, price: 160, invoiced: false, sigel: "Gk"}
+        post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "ewrqwerqw"}.as_json, price: 180, invoiced: false, sigel: "Gk"}
 
         expect(response.status).to eq(422)
       end

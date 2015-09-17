@@ -8,6 +8,16 @@ class Order < ActiveRecord::Base
 
   end
 
+  def self.sigel_json json
+    hash = JSON.parse(json)
+    recipients = hash['ill_requests'][0]['recipients']
+
+    recipient = recipients.select{|item| item["is_active_library"] == true}.first
+    recipient["library_code"]
+  rescue
+    return ""
+  end
+
   def receiving_library_code
     json_hash['ill_requests'][0]['receiving_library']['library_code']
     rescue

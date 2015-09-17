@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get 'orders/fetchorder/:id' => 'orders#fetch_order'
     get 'orders/invoice_data' => 'orders#invoice_data'
     resources :orders
+    resources :sigels
 
   end
 end

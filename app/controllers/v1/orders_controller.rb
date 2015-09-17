@@ -22,6 +22,7 @@ class V1::OrdersController < ApplicationController
   def create
 
     params[:order][:json] = params[:order][:json].to_json
+    params[:order][:sigel] = Order.sigel_json(params[:order][:json])
     order = Order.new(order_params)
 
     if order.save
@@ -36,12 +37,16 @@ class V1::OrdersController < ApplicationController
 
   def index
 
+    orders = Order.all.order('lf_number ASC')
+
     if params[:status].present? && params[:status] == 'done'
-      orders = Order.where(invoiced: true).order('lf_number ASC')
+      orders = orders.where(invoiced: true)
     elsif params[:status].present? && params[:status] == 'todo'
-      orders = Order.where(invoiced: false).order('lf_number ASC')
-    else
-      orders = Order.all.order('lf_number ASC')
+      orders = orders.where(invoiced: false)
+    end
+
+    if params[:sigel].present?
+      orders = orders.where(sigel: params[:sigel])
     end
 
     render json: {orders: orders}, status: 200
@@ -104,7 +109,7 @@ class V1::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:lf_number, :json, :price, :invoiced)
+    params.require(:order).permit(:lf_number, :json, :price, :invoiced, :sigel)
   end
 
   def order_update_params

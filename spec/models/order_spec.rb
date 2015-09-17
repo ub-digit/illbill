@@ -21,6 +21,16 @@ RSpec.describe Order, type: :model do
     end
   end
 
+  describe 'sigel_json' do
+    context 'json containing sigel' do
+      it 'should return a string' do
+        data = File.new("#{Rails.root}/spec/support/mocks/order_json_hash.json").read
+        sigel = Order.sigel_json(data)
+        expect(sigel).to eq "Gk"
+      end
+    end
+  end
+
   describe 'receiving_library_code' do
     context 'library code exists' do
       it 'should return a library code' do

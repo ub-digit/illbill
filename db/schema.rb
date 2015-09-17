@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623085054) do
+ActiveRecord::Schema.define(version: 20150917133904) do
 
   create_table "orders", force: :cascade do |t|
     t.string   "lf_number"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150623085054) do
     t.boolean  "invoiced"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "sigel"
   end
 
 end
