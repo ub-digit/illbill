@@ -72,6 +72,36 @@ class Order < ActiveRecord::Base
       return ""
   end
 
+  def user
+    json_hash['ill_requests'][0]['user']
+    rescue
+      return ""
+  end
+
+  def isbn_issn
+    json_hash['ill_requests'][0]['isbn_issn']
+    rescue
+      return ""
+  end
+
+  def author
+    json_hash['ill_requests'][0]['author']
+    rescue
+      return ""
+  end
+
+  def imprint
+    json_hash['ill_requests'][0]['imprint']
+    rescue
+      return ""
+  end
+
+  def message
+    json_hash['ill_requests'][0]['message']
+    rescue
+      return ""
+  end
+
   def processing_time
     json_hash['ill_requests'][0]['processing_time']
     rescue
