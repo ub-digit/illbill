@@ -67,7 +67,7 @@ RSpec.describe V1::OrdersController, type: :controller do
       end
     end
 
-    context 'with an allready existing lf-number' do
+    context 'with an already existing lf-number' do
       it 'should return a 422 status' do
         post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "asfadsfasdf"}.as_json, price: 160, invoiced: false, sigel: "Gk"}
         post :create, order: {lf_number: 'Skfb-150402-0003', json: {data: "ewrqwerqw"}.as_json, price: 180, invoiced: false, sigel: "Gk"}
